@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Interview</title>
+    <link rel="stylesheet" href="mock_interview_styles.css"> <!-- ✅ Updated CSS link -->
+</head>
+<body>
+    <div class="container">
+        <h2>Mock Interview</h2>
+        <p id="question">Press "Start" to begin the interview.</p>
+
+        <video id="liveVideo" autoplay playsinline muted></video>
+        <video id="videoPlayback" controls hidden></video>
+
+        <button id="startRecording" disabled>Start Recording</button>
+        <button id="stopRecording" disabled>Stop Recording</button>
+        <button id="saveVideo" hidden>Save Video</button>
+
+        <p id="timer"></p>
+
+        <button id="start">Start</button>
+        <button id="skip" disabled>Skip</button>
+        <button id="submit" disabled>Submit</button>
+
+        <p id="progress">Questions Answered: 0/10</p>
+        <p id="feedback"></p>
+    </div>
+
+    <script src="mock_interview_script.js"></script> <!-- ✅ Updated JS link -->
+</body>
+</html>
