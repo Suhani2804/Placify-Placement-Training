@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mock Interview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:enabled {
+            background-color: #218838;
+        }
+
+        #videoContainer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        p {
+            color: #555;
+        }
+
+        #feedback {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Mock Interview</h1>
+        <h3>Select Difficulty Level:</h3>
+        <select id="difficultySelect">
+            <option value="">Select Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+        <button id="loadQuestions" onclick="fetchQuestions()">Load Questions</button>
+
+        <div id="videoContainer">
+            <h3>Current Question:</h3>
+            <p id="question">The question will appear here...</p>
+            <h3>Real-Time Video Feed</h3>
+            <video id="videoPreview" autoplay></video>
+            <p><strong>Your Answer:</strong></p>
+            <p id="transcription">Your answer will appear here...</p>
+            <p><strong>AI Feedback:</strong></p>
+            <p id="feedback">Feedback will be displayed here...</p>
+        </div>
+
+        <button id="startInterview" onclick="startInterview()">Start Interview</button>
+        <button id="stopInterview" onclick="stopInterview()" disabled>Stop Interview</button>
+    </div>
+    <script src="ai_mock_interview.js"></script>
+</body>
+</html>
