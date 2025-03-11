@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Posture & Sentiment Detection</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .video-container {
+            position: relative;
+            border: 2px solid red;
+            display: inline-block;
+        }
+        #video {
+            width: 640px;
+            height: 480px;
+        }
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 640px;
+            height: 480px;
+            pointer-events: none;
+        }
+        #landmarkCanvas {
+            width: 200px;
+            height: 150px;
+            border: 2px solid black;
+            background-color: white;
+            margin-bottom: 10px;
+        }
+        .output {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Body Posture Detection</h1>
+
+    <div class="container">
+        <canvas id="landmarkCanvas"></canvas> <!-- Red dots render here -->
+        
+        <div class="video-container">
+            <video id="video" autoplay></video>
+            <canvas id="canvas"></canvas> <!-- For overlaying posture analysis -->
+        </div>
+
+        <p id="posture-status" class="output">Posture: Analyzing...</p>
+        <p id="sentimentText" class="output">Sentiment: Analyzing...</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ml5"></script>
+    <script src="bodyposture.js"></script>
+</body>
+</html>
