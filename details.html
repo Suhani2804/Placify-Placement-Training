@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <h2>User Details</h2>
+    </nav>
+
+    <div class="container">
+        <h2>Welcome, <span id="user-name"></span></h2>
+        <p>Course: <span class="info" id="user-course"></span></p>
+        <p>Batch: <span class="info" id="user-batch"></span></p>
+        <p>Branch: <span class="info" id="user-branch"></span></p>
+        <p>Skills: <span class="info" id="user-skills"></span></p>
+        <p>Email: <span class="info" id="user-email"></span></p>
+        <p>Phone No.: <span class="info" id="user-phone"></span></p>
+        
+        <button id="logout">Logout</button>
+        <button onclick="window.location.href='mock_interview.html'">Take Behavioral Interview</button>
+        <button onclick="window.location.href='ats_scanner.html'">Scan Resume with ATS</button>
+        <button onclick="window.location.href='ai_mock_interview.html'">Take Technical Interview</button>
+        <!-- <button onclick="window.open('http://127.0.0.1:5000/mail_connect', '_blank')">Mail Connect</button> -->
+
+    
+    </div>
+
+    <script>
+        // Fetch user data from localStorage
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        if (!user) {
+            alert("No user logged in!");
+            window.location.href = "index.html";  // Redirect to login if no user found
+        } else {
+            document.getElementById("user-name").textContent = user.name || "N/A";
+            document.getElementById("user-course").textContent = user.course || "N/A";
+            document.getElementById("user-batch").textContent = user.batch || "N/A";
+            document.getElementById("user-branch").textContent = user.branch || "N/A";
+            document.getElementById("user-skills").textContent = user.skills || "N/A";
+            document.getElementById("user-email").textContent = user.email || "N/A";
+            document.getElementById("user-phone").textContent = user.phone || "N/A";
+        }
+
+        // Logout Function
+        document.getElementById("logout").addEventListener("click", () => {
+            localStorage.removeItem("user"); // Clear user session
+            window.location.href = "index.html"; // Redirect to login
+        });
+
+        // Open Streamlit ATS Scanner in a new tab
+        function openATS() {
+            window.open("http://localhost:8501", "_blank");
+        }
+
+    </script>
+</body>
+</html>
