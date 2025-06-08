@@ -4,15 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mock Interview</title>
-    <link rel="stylesheet" href="mock_interview_styles.css"> <!-- ✅ Updated CSS link -->
+    <link rel="stylesheet" href="mock_interview_styles.css">
+    <style>
+        .help-icon {
+          position: fixed;
+          bottom: 25px;
+          right: 25px;
+          background-color: #6a0dad;
+          color: white;
+          border-radius: 50%;
+          width: 45px;
+          height: 45px;
+          font-size: 24px;
+          text-align: center;
+          line-height: 45px;
+          cursor: pointer;
+          z-index: 999;
+        }
+      
+        .help-popup {
+          position: fixed;
+          bottom: 80px;
+          right: 20px;
+          background: white;
+          border: 1px solid #ccc;
+          padding: 12px;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          width: 260px;
+          display: none;
+          font-size: 14px;
+          z-index: 1000;
+        }
+      
+        .help-popup::before {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          right: 30px;
+          border-width: 10px 10px 0;
+          border-style: solid;
+          border-color: white transparent transparent;
+        }
+      </style>
+      
 </head>
 <body>
+    <!-- new ui element-->
+    <h2>Real-Time Face Landmarks</h2>
+    <canvas id="faceCanvas"></canvas>
     <div class="container">
         <h2>Mock Interview</h2>
         <p id="question">Press "Start" to begin the interview.</p>
 
         <video id="liveVideo" autoplay playsinline muted></video>
         <video id="videoPlayback" controls hidden></video>
+
+        <!-- ✅ Real-time Analysis Display -->
+        <p id="posture-status">Posture: Analyzing...</p>
+        <p id="sentimentText">Sentiment: Analyzing...</p>
 
         <button id="startRecording" disabled>Start Recording</button>
         <button id="stopRecording" disabled>Stop Recording</button>
@@ -23,11 +73,40 @@
         <button id="start">Start</button>
         <button id="skip" disabled>Skip</button>
         <button id="submit" disabled>Submit</button>
-
+      
+        <div style="width: 100%; background-color: #ddd; border-radius: 5px; margin-bottom: 10px;">
+            <div id="progressBar" style="height: 20px; width: 0%; background-color: #007bff; border-radius: 5px;"></div>
+        </div>
+        
         <p id="progress">Questions Answered: 0/10</p>
         <p id="feedback"></p>
     </div>
 
-    <script src="mock_interview_script.js"></script> <!-- ✅ Updated JS link -->
+    <!-- ✅ Load MediaPipe & ml5.js for Posture Detection -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ml5"></script>
+
+    <script src="mock_interview_script.js"></script>
+    <!-- ✅ Floating Help Icon -->
+<div class="help-icon" onclick="toggleHelp()">?</div>
+
+<!-- ✅ Tooltip Popup -->
+<div class="help-popup" id="helpPopup">
+  <strong>How to use Behavioral Interview:</strong><br><br>
+  • Press <b>Start</b> to get your first question.<br>
+  • Click <b>Start Recording</b> and answer.<br>
+  • Click <b>Stop Recording</b> when done.<br>
+  • Use <b>Save Video</b> for review.<br>
+  • Hit <b>Submit</b> to submit your answer.<br>
+  • Use <b>Skip</b> to skip a question.
+</div>
+
+<script>
+  function toggleHelp() {
+    const popup = document.getElementById('helpPopup');
+    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+
 </body>
 </html>

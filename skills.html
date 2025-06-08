@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI Skill Development Feature</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #d4a1ff, #e3c8ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 50px;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+
+    .container h2 {
+      color: #333;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .container h2 span.icon {
+      font-size: 28px;
+      margin-right: 8px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4b0082; /* Dark Purple */
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3a0066;
+    }
+    
+    #course-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: flex-start;
+      padding: 10px;
+    }
+    
+    .course-card {
+      flex: 1 1 calc(30% - 20px);
+      min-width: 250px;
+      background: #f9f9f9;
+      border: 2px solid #b37cd7; /* Light purple border */
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    
+    .course-card:hover {
+      transform: translateY(-5px);
+      border-color: #4B0082; /* Deep purple on hover */
+    }
+    
+    .course-card h3 {
+      color: #4B0082;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    
+    .course-card a {
+      color: #4B0082;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+      border: 1px solid #4B0082;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .course-card a:hover {
+      background-color: #4B0082;
+      color: #fff;
+    }
+    
+  </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Find Courses Based on Your Skill</h1>
+        
+        <div class="form-group">
+            <label for="skill-dropdown">Select Your Skill:</label>
+            <select id="skill-dropdown">
+                <option value="all">All</option> <!-- Add this -->
+                <option value="">Loading your skills...</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="platform">Choose a Platform:</label>
+            <select id="platform">
+                <option value="Coursera">Coursera</option>
+                <option value="Udemy">Udemy</option>
+                <option value="edX">edX</option>
+                <option value="LinkedIn Learning">LinkedIn Learning</option>
+                <option value="FutureLearn">FutureLearn</option>
+                <option value="Skillshare">Skillshare</option>
+                <option value="Pluralsight">Pluralsight</option>
+                <option value="Khan Academy">Khan Academy</option>
+                <option value="all">All</option>
+            </select>
+        </div>
+
+        <button onclick="fetchCourses()">Find Courses</button>
+        <div id="loading" style="display: none;">🔄 Searching for courses...</div>
+        <div id="course-list"></div>
+    </div>
+
+    <script src="skills.js"></script>
+</body>
+</html>

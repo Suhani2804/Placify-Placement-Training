@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+</head>
+
+<body>
+    <div id="chatbot-container">
+        <div id="chatbot-toggle">
+            <div id="avatar"></div>
+        </div>
+        <div id="chatbot-window" class="hidden">
+            <div id="chat-header">
+                Placement Assistant
+                <span onclick="toggleChatbot()">✖</span> 
+            </div>
+            <div id="chat-body">
+                <div id="chat-avatar"></div>
+            </div>
+            <div id="chat-input">
+                <input type="text" id="user-input" placeholder="Ask me something...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var animation = lottie.loadAnimation({
+            container: document.getElementById("avatar"),
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: "https://assets10.lottiefiles.com/packages/lf20_yr6zz3wv.json"
+        });
+    </script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

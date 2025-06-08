@@ -3,53 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Mock Interview</title>
+    <title>Technical Interview</title>
+    <!-- Font Awesome for Robot Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f0f7;
+            margin: 0;
             padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin: 0 auto;
-        }
-
-        h1 {
             color: #333;
         }
 
+        .container {
+            max-width: 900px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin: auto;
+        }
+
+        h1 {
+            color: #6a0dad;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 32px;
+        }
+
+        h1 i {
+            margin-right: 10px;
+            color: #6a0dad;
+        }
+
+        h3 {
+            color: #4b0082;
+        }
+
         select, button {
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
+            padding: 10px 15px;
+            margin: 10px 5px;
+            border-radius: 10px;
             font-size: 16px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        select {
+            width: 200px;
         }
 
         button {
-            background-color: #28a745;
+            background-color: #6a0dad;
             color: white;
-            border: none;
             cursor: pointer;
-        }
-
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
+            border: none;
+            transition: 0.3s ease;
         }
 
         button:hover:enabled {
-            background-color: #218838;
+            background-color: #580e9d;
+        }
+
+        button:disabled {
+            background-color: #c2c2c2;
+            cursor: not-allowed;
         }
 
         #videoContainer {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
         }
 
@@ -57,44 +81,222 @@
             width: 100%;
             max-width: 600px;
             border-radius: 10px;
+            border: 2px solid #6a0dad;
         }
 
         p {
+            margin: 10px 0;
             color: #555;
         }
 
-        #feedback {
-            font-weight: bold;
-            color: #007bff;
+        .feedback-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f7f4fc;
+            border: 1px solid #d8ccec;
+            border-radius: 10px;
+            text-align: left;
         }
+
+        .feedback-section p {
+            margin: 8px 0;
+            font-weight: 900;
+            color: #4b0082;
+
+        }
+        
+        .feedback-section span {
+            font-weight: normal;
+            color: #333;
+        }
+        
+
+        .ideal-answer {
+            color: #6a0dad;
+            font-weight: bold;
+        }
+
+        .similarity-score {
+            color: #4b0082;
+            font-weight: bold;
+        }
+
+        .matched-keywords {
+            color: green;
+            font-weight: bold;
+        }
+
+        .missing-keywords {
+            color: red;
+            font-weight: bold;
+        }
+
+        .bert-feedback {
+            color: #b30059;
+            font-weight: bold;
+        }
+
+        .btn-container {
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        #submissionMessage {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        .section-heading {
+            font-size: 22px;
+            font-weight: 600;
+            color: #6a0dad;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #d8ccec;
+            padding-bottom: 5px;
+        }
+        
+        .feedback-section p strong {
+            color: #6a0dad;
+            font-weight: 600;
+        }
+        
+        .feedback-section span {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        /* Optional: Specific styles for certain feedback items */
+        .ideal-answer span,
+        .similarity-score span,
+        .bert-feedback span {
+            color: #4b0082;
+            font-weight: 600;
+        }
+        
+        .ner-entities span,
+        .filler-feedback span,
+        .blooms-level span,
+        .speech-rate span,
+        .pause-analysis span {
+            color: #444;
+        }
+
+       
     </style>
+    <style>
+        .help-icon {
+          position: fixed;
+          bottom: 25px;
+          right: 25px;
+          background-color: #6a0dad;
+          color: white;
+          border-radius: 50%;
+          width: 45px;
+          height: 45px;
+          font-size: 24px;
+          text-align: center;
+          line-height: 45px;
+          cursor: pointer;
+          z-index: 999;
+        }
+      
+        .help-popup {
+          position: fixed;
+          bottom: 80px;
+          right: 20px;
+          background: white;
+          border: 1px solid #ccc;
+          padding: 12px;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          width: 270px;
+          display: none;
+          font-size: 14px;
+          z-index: 1000;
+        }
+      
+        .help-popup::before {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          right: 30px;
+          border-width: 10px 10px 0;
+          border-style: solid;
+          border-color: white transparent transparent;
+        }
+      </style>
+      
 </head>
 <body>
     <div class="container">
-        <h1>AI Mock Interview</h1>
-        <h3>Select Difficulty Level:</h3>
+        <h1><i class="fas fa-robot"></i> AI Mock Interview</h1>
+
+        <h3 class="section-heading">Select Difficulty Level:</h3>
         <select id="difficultySelect">
             <option value="">Select Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
         </select>
-        <button id="loadQuestions" onclick="fetchQuestions()">Load Questions</button>
+        <button id="loadQuestions">Load Questions</button>
 
         <div id="videoContainer">
-            <h3>Current Question:</h3>
+            <h3 class="section-heading">Current Question:</h3>
             <p id="question">The question will appear here...</p>
-            <h3>Real-Time Video Feed</h3>
+            <h3 class="section-heading">Real-time Video Feed:</h3>
             <video id="videoPreview" autoplay></video>
             <p><strong>Your Answer:</strong></p>
             <p id="transcription">Your answer will appear here...</p>
-            <p><strong>AI Feedback:</strong></p>
-            <p id="feedback">Feedback will be displayed here...</p>
         </div>
 
-        <button id="startInterview" onclick="startInterview()">Start Interview</button>
-        <button id="stopInterview" onclick="stopInterview()" disabled>Stop Interview</button>
+        <div class="feedback-section" id="feedback">
+            <p id="feedback-heading">Feedback:</p>
+            <p class="ideal-answer">Ideal Answer: <span id="idealAnswer">Loading...</span></p>
+            <p class="similarity-score">Similarity Score: <span id="similarityScore">--</span>%</p>
+            <!-- <p class="matched-keywords">Matched Keywords: <span id="matchedKeywords">--</span></p>
+            <p class="missing-keywords">Missing Keywords: <span id="missingKeywords">--</span></p> -->
+            <p class="bert-feedback">BERT-Based AI Feedback: <span id="bertFeedback">Fetching feedback...</span></p>
+            <p class="ner-entities">Named Entities Mentioned: <span id="namedEntities">--</span></p>
+            <p class="filler-feedback">Filler Word Feedback: <span id="fillerFeedback">--</span></p>
+            <p class="blooms-level">Cognitive Level (Bloom's): <span id="bloomsLevel">--</span></p>
+            <p class="speech-rate">Speech Rate: <span id="speechRate">--</span></p>
+            <p class="pause-analysis">Average Pause Duration: <span id="pauseFeedback">--</span></p>
+
+        </div>
+
+        <div class="btn-container">
+            <button id="startInterview" onclick="startInterview()">Start Interview</button>
+            <button id="stopInterview" onclick="stopInterview()" disabled>Stop Interview</button>
+            <button id="submitAnswer" onclick="submitAnswer()">Submit Answer</button>
+        </div>
+        <p id="submissionMessage" style="display: none; font-weight: bold; color: green;">Answer Submitted</p>
     </div>
+
     <script src="ai_mock_interview.js"></script>
+    <!-- ✅ Floating Help Icon -->
+<div class="help-icon" onclick="toggleHelp()">?</div>
+
+<!-- ✅ Tooltip Popup for Technical Interview -->
+<div class="help-popup" id="helpPopup">
+  <strong>How to use Technical Interview:</strong><br><br>
+  • Click <b>Load Questions</b> to fetch a question.<br>
+  • Press <b>Start Interview</b> and speak.<br>
+  • Transcribed text appears below.<br>
+  • Press <b>Stop</b> to pause and review.<br>
+  • Retry with <b>Start Recording</b> if needed.<br>
+  • Click <b>Submit</b> to get your analysis.
+</div>
+
+<script>
+  function toggleHelp() {
+    const popup = document.getElementById('helpPopup');
+    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+
 </body>
 </html>

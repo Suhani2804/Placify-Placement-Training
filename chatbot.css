@@ -1,0 +1,143 @@
+#chatbot-container {
+    width: 100%; /* Usually full inside iframe – no need to change unless too wide */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: Arial, sans-serif;
+}
+
+/* Floating avatar button */
+#chatbot-toggle {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+#avatar {
+    width: 60px;
+    height: 60px;
+}
+
+#chatbot-window {
+    display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 60px;
+    right: 30px;
+    width: 400px;
+    height: 500px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+  }
+  
+
+
+/* Chat header */
+#chat-header {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#chat-header span {
+    float: right;
+    cursor: pointer;
+}
+
+/* Chat body */
+#chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 500px; /* Ensure messages stay inside the container */
+    -webkit-overflow-scrolling: touch;
+    font-size: 14px;
+}
+
+#chat-body::-webkit-scrollbar {
+    width: 6px; /* Adjust scrollbar width */
+}
+#chat-body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* Scrollbar color */
+    border-radius: 3px;
+}
+
+#chat-body::-webkit-scrollbar-track {
+    background: transparent; /* Hide track */
+}
+/* Chat input */
+#chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+#user-input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    margin-left: 5px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+/* 🔹 Chatbot Iframe (for when it's embedded) */
+#chatbot-frame {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+}
+
+/* 🔹 Floating Toggle Button */
+#toggle-chatbot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
